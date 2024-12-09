@@ -1,0 +1,31 @@
+swagger: "2.0"
+info:
+  title: OCR API
+  description: API for extracting text from images using PaddleOCR
+  version: "1.0"
+paths:
+  /api/upload_image:
+    post:
+      summary: Upload image and extract text
+      description: Upload an image and extract text using PaddleOCR.
+      consumes:
+        - multipart/form-data
+      parameters:
+        - name: image
+          in: formData
+          type: file
+          required: true
+          description: The image to process.
+      responses:
+        200:
+          description: Extracted text from the image.
+          schema:
+            type: object
+            properties:
+              text:
+                type: string
+                description: Extracted text.
+        400:
+          description: Error in uploading or processing the image.
+        500:
+          description: Internal server error.
